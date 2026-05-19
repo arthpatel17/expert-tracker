@@ -277,7 +277,6 @@
         // ============================================================
         const SHEET_ID = '1DcappmpTtijBsuWk89zIav9ETrn43DRE6lyeC1Tfdns';
         const GOAL = 800;
-        const TOTAL_DAYS = 28;
         const START_DATE = new Date('2026-05-01');
         const DAILY_TARGET = Math.ceil(GOAL / TOTAL_DAYS);
         const REFRESH_INTERVAL = 30000; // 30 seconds
@@ -306,12 +305,26 @@
             });
         }
 
-        function getDaysElapsed() {
-            const now = new Date();
-            const diff = Math.floor((now - START_DATE) / (1000*60*60*24));
-            return Math.max(0, Math.min(diff, TOTAL_DAYS));
-        }
-        function getDaysLeft() { return Math.max(0, TOTAL_DAYS - getDaysElapsed()); }
+        const BUSINESS_DAYS = [
+    '2026-05-01','2026-05-04','2026-05-05','2026-05-06','2026-05-07',
+    '2026-05-08','2026-05-11','2026-05-12','2026-05-13','2026-05-14',
+    '2026-05-15','2026-05-18','2026-05-19','2026-05-20','2026-05-21',
+    '2026-05-22','2026-05-26','2026-05-27','2026-05-28','2026-05-29'
+];
+const TOTAL_DAYS = BUSINESS_DAYS.length;
+function getDaysElapsed() {
+    const today = new Date().toISOString().split('T')[0];
+    let count = 0;
+    for (let d of BUSINESS_DAYS) { if (d < today) count++; }
+    return count;
+}
+function getDaysLeft() {
+    const today = new Date().toISOString().split('T')[0];
+    let count = 0;
+    for (let d of BUSINESS_DAYS) { if (d >= today) count++; }
+    return count;
+}
+
         function getDayLabel(index) {
             const d = new Date(START_DATE);
             d.setDate(d.getDate() + index);

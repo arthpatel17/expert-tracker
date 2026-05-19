@@ -305,31 +305,31 @@
             });
         }
 
-        const BUSINESS_DAYS = [
-    '2026-05-01','2026-05-04','2026-05-05','2026-05-06','2026-05-07',
-    '2026-05-08','2026-05-11','2026-05-12','2026-05-13','2026-05-14',
-    '2026-05-15','2026-05-18','2026-05-19','2026-05-20','2026-05-21',
-    '2026-05-22','2026-05-26','2026-05-27','2026-05-28','2026-05-29'
-];
-const TOTAL_DAYS = BUSINESS_DAYS.length;
-function getDaysElapsed() {
-    const today = new Date().toISOString().split('T')[0];
-    let count = 0;
-    for (let d of BUSINESS_DAYS) { if (d < today) count++; }
-    return count;
-}
-function getDaysLeft() {
-    const today = new Date().toISOString().split('T')[0];
-    let count = 0;
-    for (let d of BUSINESS_DAYS) { if (d >= today) count++; }
-    return count;
-}
-
-        function getDayLabel(index) {
-            const d = new Date(START_DATE);
-            d.setDate(d.getDate() + index);
-            return (d.getMonth()+1) + '/' + d.getDate();
-        }
+            const BUSINESS_DAYS = [
+            const BUSINESS_DAYS = [
+                '2026-05-01','2026-05-04','2026-05-05','2026-05-06','2026-05-07',
+                '2026-05-08','2026-05-11','2026-05-12','2026-05-13','2026-05-14',
+                '2026-05-15','2026-05-18','2026-05-19','2026-05-20','2026-05-21',
+                '2026-05-22','2026-05-26','2026-05-27','2026-05-28','2026-05-29'
+            ];
+            const TOTAL_DAYS = BUSINESS_DAYS.length;
+            function getDaysElapsed() {
+                const today = new Date().toISOString().split('T')[0];
+                let count = 0;
+                for (let d of BUSINESS_DAYS) { if (d < today) count++; }
+                return count;
+            }
+            function getDaysLeft() {
+                const today = new Date().toISOString().split('T')[0];
+                let count = 0;
+                for (let d of BUSINESS_DAYS) { if (d >= today) count++; }
+                return count;
+            }
+            function getDayLabel(index) {
+                const d = new Date(START_DATE);
+                                d.setDate(d.getDate() + index);
+                                return (d.getMonth()+1) + '/' + d.getDate();
+            }                
 
         function switchTab(e, tab) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
